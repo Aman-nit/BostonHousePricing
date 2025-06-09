@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Boston House Price Predictor</title>
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background: #121212;
+        color: #ffffff;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .container {
+        background: #1e1e1e;
+        padding: 30px 40px;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
+        width: 100%;
+        max-width: 800px;
+        animation: fadeIn 1s ease-in-out;
+      }
+
+      h2 {
+        text-align: center;
+        color: #00ffff;
+        margin-bottom: 30px;
+      }
+
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        animation: slideIn 0.5s ease forwards;
+      }
+
+      label {
+        margin-bottom: 5px;
+        font-weight: 600;
+        color: #cfd8dc;
+      }
+
+      input[type="number"] {
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        background: #2e2e2e;
+        color: white;
+        transition: all 0.3s ease;
+        outline: none;
+      }
+
+      input[type="number"]:focus {
+        background: #3a3a3a;
+        box-shadow: 0 0 8px #00ffff;
+      }
+
+      .full-width {
+        grid-column: span 2;
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      button {
+        background: #00bcd4;
+        color: #fff;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      button:hover {
+        background: #00e5ff;
+      }
+
+      #result {
+        margin-top: 20px;
+        font-size: 20px;
+        color: #00ffab;
+        text-align: center;
+        animation: fadeIn 1s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Boston House Price Prediction</h2>
+      <form id="predictionForm">
+        <!-- Input Fields -->
+        <div class="form-group">
+          <label for="CRIM">CRIM - Crime Rate</label>
+          <input
+            type="number"
+            name="CRIM"
+            placeholder="e.g. 0.02729"
+            step="any"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="ZN">ZN - Residential Land Zone</label>
+          <input
+            type="number"
+            name="ZN"
+            placeholder="e.g. 0.0"
+            step="any"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="INDUS">INDUS - Industrial Area Proportion</label>
+          <input
+            type="number"
+            name="INDUS"
+            placeholder="e.g. 7.07"
+            step="any"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="CHAS">CHAS - Charles River Dummy (0 or 1)</label>
+          <input
+            type="number"
+            name="CHAS"
+            placeholder="0 or 1"
+            min="0"
+            max="1"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="NOX">NOX - Nitric Oxide Concentration</label>
+          <input
+            type="number"
+            name="NOX"
+            placeholder="e.g. 0.538"
+            step="any"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="RM">RM - Average Rooms per Dwelling</label>
+          <input
+            type="number"
+            name="RM"
+            placeholder="e.g. 6.575"
+            step="any"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="AGE">AGE - % Built Before 1940</label>
+          <input
+            type="number"
+            name="AGE"
+            placeholder="e.g. 65.2"
+            step="any"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="DIS">DIS - Distance to Employment Centers</label>
+          <input
+            type="number"
+            name="DIS"
+            placeholder="e.g. 4.09"
+            step="any"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="RAD">RAD - Accessibility to Highways</label>
+          <input
+            type="number"
+            name="RAD"
+            placeholder="e.g. 1"
+            step="any"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="TAX">TAX - Property Tax Rate</label>
+          <input
+            type="number"
+            name="TAX"
+            placeholder="e.g. 296"
+            step="any"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="PTRATIO">PTRATIO - Pupil-Teacher Ratio</label>
+          <input
+            type="number"
+            name="PTRATIO"
+            placeholder="e.g. 15.3"
+            step="any"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="B">B - % of African-American Population</label>
+          <input
+            type="number"
+            name="B"
+            placeholder="e.g. 396.9"
+            step="any"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="LSTAT">LSTAT - % Lower Status Population</label>
+          <input
+            type="number"
+            name="LSTAT"
+            placeholder="e.g. 4.98"
+            step="any"
+            required
+          />
+        </div>
+
+        <!-- Submit -->
+        <div class="full-width">
+          <button type="submit">Predict Price</button>
+        </div>
+      </form>
+
+      <!-- Output -->
+      <div id="result"></div>
+    </div>
+
+    <script>
+      const form = document.getElementById("predictionForm");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const data = new URLSearchParams(formData);
+
+        const response = await fetch("/Predict", {
+          method: "POST",
+          body: data,
+        });
+
+        const result = await response.text();
+        document.getElementById("result").innerText = result;
+      });
+    </script>
+  </body>
+</html>
